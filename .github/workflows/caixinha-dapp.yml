@@ -1,0 +1,40 @@
+name: Caixinha Dapp CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x, 23.x]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Change to caixinha-dapp directory
+      run: cd caixinha-dapp
+
+    - name: Install dependencies
+      run: npm install
+      working-directory: caixinha-dapp
+
+    - name: Run lint
+      run: npm run lint
+      working-directory: caixinha-dapp
+
+    - name: Run tests
+      run: npm run test --if-present
+      working-directory: caixinha-dapp
