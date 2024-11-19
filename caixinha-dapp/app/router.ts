@@ -1,7 +1,7 @@
-import walletRouter from './wallet/wallet-routes'
+import walletRouter from "./wallet/wallet-routes";
 
-export default expressApp => {
-    console.log('config routes')
+export default (expressApp) => {
+  console.log("config routes");
 
-    expressApp.use('/wallet', walletRouter)
-}
+  expressApp.use("/wallet", walletRouter);
+};

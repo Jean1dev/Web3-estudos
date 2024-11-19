@@ -3,7 +3,10 @@
   "scripts": {
     "lint:fix": "prettier */*.js \"*/**/*{.js,.ts}\" -w",
     "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check",
-    "dev": "ts-node app/server.ts"
+    "dev": "ts-node app/server.ts",
+    "start": "node dist/app/server.js",
+    "build": "tsc",
+    "postinstall": "tsc"
   },
   "dependencies": {
     "@coral-xyz/anchor": "^0.30.1",
