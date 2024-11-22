@@ -7,7 +7,7 @@ describe("caixinha-dapp", () => {
   const provider = anchor.AnchorProvider.local();
   anchor.setProvider(provider);
   const program = anchor.workspace.CaixinhaDapp as Program<CaixinhaDapp>;
-  const caixinhaKeyPair = anchor.web3.Keypair.generate();
+  //const caixinhaKeyPair = anchor.web3.Keypair.generate();
 
   it("Creates a new caixinha!", async () => {
     const [caixinhaPDA, _] = await anchor.web3.PublicKey.findProgramAddress(
@@ -32,5 +32,9 @@ describe("caixinha-dapp", () => {
 
     const caixinha = await program.account.caixinha.fetch(caixinhaPDA);
     expect(caixinha.name).to.eq("Test Name");
+    expect(caixinha.desc).to.eq("Test Description");
+    expect(caixinha.refId).to.eq("646f538de5cd54cc6344ec69");
+    expect(caixinha.owner).to.eq(provider.wallet.publicKey);
+    expect(caixinha.amount).to.eq(0);
   });
 });
