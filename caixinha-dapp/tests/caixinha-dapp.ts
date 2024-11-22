@@ -10,23 +10,27 @@ describe("caixinha-dapp", () => {
   const caixinhaKeyPair = anchor.web3.Keypair.generate();
 
   it("Creates a new caixinha!", async () => {
+    const [caixinhaPDA, _] = await anchor.web3.PublicKey.findProgramAddress(
+      [Buffer.from("CAIXINHA_DEMO"), provider.wallet.publicKey.toBuffer()],
+      program.programId
+    );
+
     const txHash = await program.methods.createCaixinha(
       "Test Name",
       "Test Description",
       "646f538de5cd54cc6344ec69"
     )
     .accounts({
-      //@ts-ignore
-      caixinha: caixinhaKeyPair.publicKey,
+      caixinha: caixinhaPDA,
       user: provider.wallet.publicKey,
       systemProgram: anchor.web3.SystemProgram.programId,
     })
-    .signers([caixinhaKeyPair])
+    .signers([provider.wallet.payer])
     .rpc();
 
     console.log("txHash", txHash);
 
-    const caixinha = await program.account.caixinha.fetch(caixinhaKeyPair.publicKey);
+    const caixinha = await program.account.caixinha.fetch(caixinhaPDA);
     expect(caixinha.name).to.eq("Test Name");
   });
 });

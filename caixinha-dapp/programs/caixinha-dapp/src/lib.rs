@@ -25,7 +25,7 @@ pub mod caixinha_dapp {
 
 #[derive(Accounts)]
 pub struct CreateCaixinha<'info> {
-    #[account(init, payer = user, space = 8 + 8 + 8 + 32 + 32, seeds=[b"CAIXINHA_DEMO".as_ref(), user.key().as_ref()], bump)]
+    #[account(init, payer = user, space = 8 + 32 + 32 + 8 + 32, seeds=[b"CAIXINHA_DEMO", user.key().as_ref()], bump)]
     pub caixinha: Account<'info, Caixinha>,
     #[account(mut)]
     pub user: Signer<'info>,
