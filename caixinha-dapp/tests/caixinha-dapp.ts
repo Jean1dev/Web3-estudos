@@ -1,3 +1,4 @@
+//@ts-nocheck
 import * as anchor from "@coral-xyz/anchor";
 import { Program } from "@coral-xyz/anchor";
 import { CaixinhaDapp } from "../target/types/caixinha_dapp";
