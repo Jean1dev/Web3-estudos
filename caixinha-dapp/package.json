@@ -6,7 +6,8 @@
     "dev": "ts-node app/server.ts",
     "start": "node dist/app/server.js",
     "build": "tsc",
-    "postinstall": "tsc"
+    "postinstall": "tsc",
+    "test": "ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
   },
   "dependencies": {
     "@coral-xyz/anchor": "^0.30.1",

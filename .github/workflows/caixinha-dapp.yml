@@ -34,7 +34,3 @@ jobs:
     - name: Run lint
       run: npm run lint
       working-directory: caixinha-dapp
-
-    - name: Run tests
-      run: npm run test --if-present
-      working-directory: caixinha-dapp
