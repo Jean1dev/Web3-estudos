@@ -6,5 +6,3 @@ const router = Router();
 router.post("/airdrop", requestAirDrop);
 
 export default router;
-
-

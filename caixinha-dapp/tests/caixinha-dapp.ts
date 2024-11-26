@@ -15,18 +15,19 @@ describe("caixinha-dapp", () => {
       program.programId
     );
 
-    const txHash = await program.methods.createCaixinha(
-      "Test Name",
-      "Test Description",
-      "646f538de5cd54cc6344ec69"
-    )
-    .accounts({
-      caixinha: caixinhaPDA,
-      user: provider.wallet.publicKey,
-      systemProgram: anchor.web3.SystemProgram.programId,
-    })
-    .signers([provider.wallet.payer])
-    .rpc();
+    const txHash = await program.methods
+      .createCaixinha(
+        "Test Name",
+        "Test Description",
+        "646f538de5cd54cc6344ec69"
+      )
+      .accounts({
+        caixinha: caixinhaPDA,
+        user: provider.wallet.publicKey,
+        systemProgram: anchor.web3.SystemProgram.programId,
+      })
+      .signers([provider.wallet.payer])
+      .rpc();
 
     console.log("txHash", txHash);
 
@@ -45,16 +46,15 @@ describe("caixinha-dapp", () => {
       program.programId
     );
 
-    const txHash = await program.methods.deposit(
-      new anchor.BN(100)
-    )
-    .accounts({
-      caixinha: caixinhaPDA,
-      user: provider.wallet.publicKey,
-      systemProgram: anchor.web3.SystemProgram.programId,
-    })
-    .signers([provider.wallet.payer])
-    .rpc();
+    const txHash = await program.methods
+      .deposit(new anchor.BN(100))
+      .accounts({
+        caixinha: caixinhaPDA,
+        user: provider.wallet.publicKey,
+        systemProgram: anchor.web3.SystemProgram.programId,
+      })
+      .signers([provider.wallet.payer])
+      .rpc();
 
     console.log("txHash", txHash);
 
