@@ -13,12 +13,14 @@ pub mod caixinha_dapp {
         ref_id: String,
     ) -> Result<()> {
         let caixinha = &mut ctx.accounts.caixinha;
+        let authority = &mut ctx.accounts.authority;
+
         caixinha.name = name;
         caixinha.desc = desc;
         caixinha.ref_id = ref_id;
         caixinha.amount = 0;
         caixinha.deposits_count = 0;
-        caixinha.owner = *ctx.accounts.user.key;
+        caixinha.owner = authority.key();
         Ok(())
     }
 
@@ -32,10 +34,10 @@ pub mod caixinha_dapp {
 
 #[derive(Accounts)]
 pub struct CreateCaixinha<'info> {
-    #[account(init, payer = user, space = 8 + 32 + 32 + 8 + 32, seeds=[b"CAIXINHA_DEMO", user.key().as_ref()], bump)]
+    #[account(init, payer = authority, space = 8 + 32 + 32 + 8 + 32)]
     pub caixinha: Account<'info, Caixinha>,
     #[account(mut)]
-    pub user: Signer<'info>,
+    pub authority: Signer<'info>,
     pub system_program: Program<'info, System>,
 }
 
