@@ -23,7 +23,7 @@ describe("caixinha-dapp", () => {
       )
       .accounts({
         caixinha: caixinhaPDA,
-        user: provider.wallet.publicKey,
+        authority: provider.wallet.publicKey,
         systemProgram: anchor.web3.SystemProgram.programId,
       })
       .signers([provider.wallet.payer])
@@ -50,7 +50,7 @@ describe("caixinha-dapp", () => {
       .deposit(new anchor.BN(100))
       .accounts({
         caixinha: caixinhaPDA,
-        user: provider.wallet.publicKey,
+        authority: provider.wallet.publicKey,
         systemProgram: anchor.web3.SystemProgram.programId,
       })
       .signers([provider.wallet.payer])

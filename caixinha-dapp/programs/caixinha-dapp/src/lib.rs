@@ -18,14 +18,15 @@ pub mod caixinha_dapp {
         caixinha.name = name;
         caixinha.desc = desc;
         caixinha.ref_id = ref_id;
-        caixinha.amount = 0;
+        caixinha.amount = 0.0;
         caixinha.deposits_count = 0;
         caixinha.owner = authority.key();
         Ok(())
     }
 
-    pub fn deposit(ctx: Context<Deposit>, amount: u64) -> Result<()> {
+    pub fn deposit(ctx: Context<Deposit>, amount: f32) -> Result<()> {
         let caixinha = &mut ctx.accounts.caixinha;
+        
         caixinha.amount += amount;
         caixinha.deposits_count += 1;
         Ok(())
@@ -46,7 +47,7 @@ pub struct Caixinha {
     pub name: String,
     pub desc: String,
     pub ref_id: String,
-    pub amount: u64,
+    pub amount: f32,
     pub deposits_count: u8,
     pub owner: Pubkey,
 }
