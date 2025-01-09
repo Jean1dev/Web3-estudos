@@ -11,7 +11,7 @@ solana balance --url devnet
 solana airdrop 1 6VSpmMpW7uyVmmpvGyEAryNtf2H82azd5CfvnyA6fZ1k --url devnet 
 
 # Transfere Solana para a carteira especificada
-solana transfer ANqM2cDocza5RwehzLuwkkBQTPFQGwqt958hbKh5zzDN 1 --url devnet
+solana transfer ANqM2cDocza5RwehzLuwkkBQTPFQGwqt958hbKh5zzDN 3 --url devnet
 
 # Criação do token
 spl-token create-token --url devnet 
