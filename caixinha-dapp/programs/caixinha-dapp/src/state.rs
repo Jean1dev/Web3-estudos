@@ -15,5 +15,6 @@ pub struct MyAchievement {
     pub price: f32,
     pub name: String,
     pub img_url: String,
-    pub owner: Pubkey,
+    pub owner: String,
+    pub creator: Pubkey,
 }
