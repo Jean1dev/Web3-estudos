@@ -9,3 +9,12 @@ pub struct Caixinha {
     pub deposits_count: u8,
     pub owner: Pubkey,
 }
+
+#[account]
+pub struct MyAchievement {
+    pub price: f32,
+    pub name: String,
+    pub img_url: String,
+    pub owner: String,
+    pub creator: Pubkey,
+}
