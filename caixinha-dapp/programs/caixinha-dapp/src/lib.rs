@@ -37,4 +37,8 @@ pub mod caixinha_dapp {
     pub fn buy_nft(ctx: Context<OrderBuy>, payed_price: f32) -> Result<()> {
         instructions::order_buy_nft::handler(ctx, payed_price)
     }
+
+    pub fn trade_nft(ctx: Context<TradeNft>) -> Result<()> {
+        instructions::trade_nft::handler(ctx)
+    }
 }
