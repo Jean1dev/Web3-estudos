@@ -16,9 +16,9 @@ describe("Test", () => {
       .accounts({
         vaquinha: newVaquinhaKeypar.publicKey,
         creator: pg.wallet.publicKey,
-        systemProgram: pg.PROGRAM_ID,
+        systemProgram: web3.SystemProgram.programId,
       })
-      .signers([pg.wallet.keypair])
+      .signers([newVaquinhaKeypar])
       .rpc();
 
     console.log(`Use 'solana confirm -v ${txHash}' to see the logs`);

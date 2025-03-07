@@ -12,7 +12,7 @@ try {
   console.log("A conta não existe ainda, pode ser criada.");
 }
 
-const nameVaquinha = "Vaquinha test automatizado";
+const nameVaquinha = "Vaquinha client automatizado";
 const description = "Uma description qualquer";
 const newVaquinhaKeypar = new web3.Keypair();
 
@@ -26,7 +26,7 @@ const txHash = await pg.program.methods
   .accounts({
     vaquinha: newVaquinhaKeypar.publicKey,
     creator: pg.wallet.publicKey,
-    systemProgram: pg.PROGRAM_ID,
+    systemProgram: web3.SystemProgram.programId,
   })
-  .signers([pg.wallet.keypair])
+  .signers([newVaquinhaKeypar])
   .rpc();
