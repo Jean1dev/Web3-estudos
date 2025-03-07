@@ -6,8 +6,6 @@ pub mod state;
 pub use instructions::*;
 pub use state::*;
 
-// This is your program's public key and it will update
-// automatically when you build the project.
 declare_id!("AWbti2H3pEJiTAPPd1h1Mejwcim6XuBWWXNzAdojJGW2");
 
 #[program]
@@ -20,5 +18,9 @@ pub mod vaquinha_crypto {
         description: String,
     ) -> Result<()> {
         instructions::create_vaquinha::handler(ctx, name, description)
+    }
+
+    pub fn donate(ctx: Context<Donate>, amount: u64) -> Result<()> {
+        instructions::donate::handler(ctx, amount)
     }
 }

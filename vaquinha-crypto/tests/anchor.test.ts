@@ -34,4 +34,50 @@ describe("Test", () => {
     assert(vaquinhaAccount.name === nameVaquinha);
     assert(vaquinhaAccount.description === description);
   });
+
+  it("It should not be possible to make a donation because the value is less than zero", async () => {
+    const existsVaquinhaPubKey = "6nmKJQRPvt1DLFpJQ283v81GBUAuS5RHuQAd1i3YCNSR";
+
+    try {
+      await pg.program.methods
+        .donate(new BN(0))
+        .accounts({
+          vaquinha: existsVaquinhaPubKey,
+          user: pg.wallet.publicKey,
+          systemProgram: web3.SystemProgram.programId,
+        })
+        .rpc();
+    } catch (err) {
+      console.log("Erro capturado:", err.toString());
+
+      assert(err.toString().includes("AmountInvalid."));
+    }
+  });
+
+  it("must make a donation", async () => {
+    const existsVaquinhaPubKey = "6nmKJQRPvt1DLFpJQ283v81GBUAuS5RHuQAd1i3YCNSR";
+
+    const vaquinhaAccount = await pg.program.account.vaquinha.fetch(
+      existsVaquinhaPubKey
+    );
+
+    const currentAmmount = new BN(vaquinhaAccount.amountDonated);
+
+    await pg.program.methods
+      .donate(new BN(1))
+      .accounts({
+        vaquinha: existsVaquinhaPubKey,
+        user: pg.wallet.publicKey,
+        systemProgram: web3.SystemProgram.programId,
+      })
+      .rpc();
+
+    const expectedAmount = currentAmmount.add(new BN(1));
+
+    const vaquinhaAccountUpdated = await pg.program.account.vaquinha.fetch(
+      existsVaquinhaPubKey
+    );
+
+    assert(new BN(vaquinhaAccountUpdated.amountDonated).eq(expectedAmount));
+  });
 });
