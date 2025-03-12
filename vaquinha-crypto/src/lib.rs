@@ -23,4 +23,8 @@ pub mod vaquinha_crypto {
     pub fn donate(ctx: Context<Donate>, amount: u64) -> Result<()> {
         instructions::donate::handler(ctx, amount)
     }
+
+    pub fn withdraw(ctx: Context<Withdraw>) -> Result<()> {
+        instructions::withdraw::handler(ctx)
+    }
 }

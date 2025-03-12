@@ -80,4 +80,43 @@ describe("Test", () => {
 
     assert(new BN(vaquinhaAccountUpdated.amountDonated).eq(expectedAmount));
   });
+
+  it("You should not complete the withdrawal because the vaquinha has no funds", async () => {
+    const existsVaquinhaPubKey = "GdptC3UbhQrcMoXQ2fpesEY8qxbF7wxmJS1GyrvPdjYq";
+    try {
+      await pg.program.methods
+        .withdraw()
+        .accounts({
+          vaquinha: existsVaquinhaPubKey,
+          user: pg.wallet.publicKey,
+          systemProgram: web3.SystemProgram.programId,
+        })
+        .rpc();
+    } catch (err) {
+      console.log("Erro capturado:", err.toString());
+
+      assert(err.toString().includes("NoFunds."));
+    }
+  });
+
+  it("You should not complete the withdrawal because the signer is not the owner of the vaquinha", async () => {
+    const existsVaquinhaPubKey = "Eqksw7W2ZQgvTmH2JTj5zeTh76wuUwiPXZnRErLgRm2B";
+    const newVaquinhaKeypar = new web3.Keypair();
+
+    try {
+      await pg.program.methods
+        .withdraw()
+        .accounts({
+          vaquinha: existsVaquinhaPubKey,
+          user: newVaquinhaKeypar.publicKey,
+          systemProgram: web3.SystemProgram.programId,
+        })
+        .signers([newVaquinhaKeypar])
+        .rpc();
+    } catch (err) {
+      console.log("Erro capturado:", err.toString());
+
+      assert(err.toString().includes("WrongOwner."));
+    }
+  });
 });
