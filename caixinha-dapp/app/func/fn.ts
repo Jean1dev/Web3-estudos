@@ -5,8 +5,8 @@ import AppState from "../state";
 export async function requestAirDrop(req: Request, res: Response) {
   const sols = req.body?.sols || 1;
   const publicKey =
-    req.body?.publicKey || "6VSpmMpW7uyVmmpvGyEAryNtf2H82azd5CfvnyA6fZ1k";
-  const net = req.body?.net || "devnet";
+    req.body?.pubkey || "EFboku6ECMdG95kPi4iXwLsS57sqiGDoMk6yynN915js";
+  const net = req.body?.clusterNet || "devnet";
 
   AppState.addPublicKey(publicKey);
 
